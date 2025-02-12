@@ -13,7 +13,7 @@ public class BingoMech {
     //This will be the method to generate the random numbers for the bingo game
     public int generateRandomNumber() {
         Random rand = new Random();
-        int randNum = rand.nextInt(75) + 1;
+        int randNum = rand.nextInt(98) + 1;
         System.out.println("The random number is: " + randNum);
         return randNum;
     }   
@@ -24,5 +24,7 @@ public class BingoMech {
         System.out.println("The manual number is: " + manualNum);
         return manualNum;
     }
+
+    //This will be the method to check the number against the bingo card
 
 }

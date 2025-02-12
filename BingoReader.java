@@ -28,16 +28,24 @@ public class BingoReader {
                 String data = fileReader.nextLine();
                 System.out.println(data);
                 //This is the check for the card name ex (Card1) and then the numbers on the card
-                if (data.contains("Card")) {
+                if (data.contains("Card\\d+")) {
                     System.out.println("This is the card name: " + data);
+                    //loop to read the next 5 lines for the numbers on the card
+                    for (int i = 0; i < 5; i++) {
+                        data = fileReader.nextLine();
+                        System.out.println("This is the numbers on the card: " + data);
+                    }
                 } else {
-                    System.out.println("This is the numbers on the card: " + data);
+                    //This is to show there is a blank line
+                    //MAKE SURE THIS WORKS
+                    System.out.println("This is a blank line");
+                    fileReader.nextLine();
                 }
             }
             fileReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred or the file wasn't found.");
-            e.printStackTrace();
+            e.printStackTrace();}
 
     }
 
@@ -46,6 +54,16 @@ public class BingoReader {
     
     //This will be the method to create the 2D array to store the bingo card
     public void createBingoCardArray() {
-        
+        bingoCardArray = new String[5][5];
+    }
+
+    //This will be the method to print the bingo card
+    public void printBingoCard() {
+        for (int i = 0; i < bingoCardArray.length; i++) {
+            for (int j = 0; j < bingoCardArray[i].length; j++) {
+                System.out.print(bingoCardArray[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
