@@ -21,6 +21,14 @@ public class Main {
         System.out.println("The random number is: " + randomNum);
         bingoMech.checkBingoCard(randomNum, bingoCards.getBingoCardArray());
 
+        //This will be test code to test the manual input
+        // String manualNum = bingoMech.checkManualInput("B-1");
+        // System.out.println("The manual number is: " + manualNum);
+        // bingoMech.checkBingoCard(manualNum, bingoCards.getBingoCardArray());
+
+        
+
+
 
 
     }

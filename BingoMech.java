@@ -98,6 +98,11 @@ public class BingoMech {
         System.out.println("The Bingo point has been checked!");
     }
 
+
+    //Need to setup a mehtod to check for a Bingo by either making another 2D array to check for the Bingo or
+    //by checking the rows and columns for the Bingo after each number is called using a stack or queue.
+
+    
     
 
 
