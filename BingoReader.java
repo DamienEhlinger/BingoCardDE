@@ -35,11 +35,6 @@ public class BingoReader {
                         data = fileReader.nextLine();
                         System.out.println("This is the numbers on the card: " + data);
                     }
-                } else {
-                    //This is to show there is a blank line
-                    //MAKE SURE THIS WORKS
-                    System.out.println("This is a blank line");
-                    fileReader.nextLine();
                 }
             }
             fileReader.close();

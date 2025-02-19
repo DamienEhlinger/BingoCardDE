@@ -6,14 +6,19 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to BingoCardDE!");
         BingoReader bingoCards = new BingoReader();
-        bingoCards.readBingoCard(new File("\"C:\\Users\\ehlingerd4685\\Downloads\\BingoCards.txt\""));
-        bingoCards.createBingoCardArray();
-        bingoCards.printBingoCard();
+       // bingoCards.readBingoCard(new File("\"C:\\Users\\ehlingerd4685\\Downloads\\BingoCards.txt\""));
+        //bingoCards.createBingoCardArray();
+        //bingoCards.printBingoCard();
         BingoMech bingoMech = new BingoMech();
 
+        //Test that the text file is being read correctly
+        bingoCards.readBingoCard(new File("C:\\Users\\ehlingerd4685\\Downloads\\BingoCards.txt"));
+        bingoCards.createBingoCardArray();
+        bingoCards.printBingoCard();
+
         //This will be test code to test the random number generator
-        String randomNum = bingoMech.generateRandomNumWithLet();
-        bingoMech.checkBingoCard(randomNum, bingoCards.getBingoCardArray());
+        // String randomNum = bingoMech.generateRandomNumWithLet();
+        // bingoMech.checkBingoCard(randomNum, bingoCards.getBingoCardArray());
 
 
 
