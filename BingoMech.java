@@ -36,7 +36,8 @@ public class BingoMech {
     //This will be the method to check the number against the bingo card it will check the number and letter
     //and then check the bingo card to see if the number is on the card. 
     //The way this will work is by first checking the letter and then the number.
-    public void checkBingoCard(String bingoDraw, String[][] bingoCardArray) {
+
+   public void checkBingoCard(String bingoDraw, String[][] bingoCardArray) {
         String bingoNum = bingoDraw;
         System.out.println("The Bingo point is: " + bingoNum);
 
@@ -46,7 +47,9 @@ public class BingoMech {
 
         //check the number in the string which should be between 1 and 98 which is after the letter so index 2 to the end
         String num = bingoNum.substring(1);
-        System.out.println("The number is: " + num);
+        //parse the string to an int
+        int numConvert = Integer.parseInt(num);
+        System.out.println("The number is: " + numConvert);
 
 
 
@@ -84,9 +87,10 @@ public class BingoMech {
                 break;
         }
 
+
         //This will be the code to check the card for the number with the columnCheck
         for (int i = 0; i < bingoCardArray.length; i++) {
-            if (bingoCardArray[i][columnCheck].equals(num)) {
+            if (bingoCardArray[i][columnCheck].equals(String.valueOf(numConvert))) {
                 System.out.println("The number is on the card!");
             }
         }
@@ -94,11 +98,7 @@ public class BingoMech {
         System.out.println("The Bingo point has been checked!");
     }
 
-    //Check for a BINGO on the card
-    public void checkBingo(String[][] bingoCardArray) {
     
-        
-    }
 
 
 }

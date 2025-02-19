@@ -14,11 +14,12 @@ public class Main {
         //Test that the text file is being read correctly
         bingoCards.readBingoCard(new File("C:\\Users\\ehlingerd4685\\Downloads\\BingoCards.txt"));
         bingoCards.createBingoCardArray();
-        bingoCards.printBingoCard();
+        //bingoCards.printBingoCard();
 
         //This will be test code to test the random number generator
-        // String randomNum = bingoMech.generateRandomNumWithLet();
-        // bingoMech.checkBingoCard(randomNum, bingoCards.getBingoCardArray());
+        String randomNum = bingoMech.generateRandomNumWithLet();
+        System.out.println("The random number is: " + randomNum);
+        bingoMech.checkBingoCard(randomNum, bingoCards.getBingoCardArray());
 
 
 
