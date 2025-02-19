@@ -66,4 +66,8 @@ public class BingoReader {
             System.out.println();
         }
     }
+
+    public String[][] getBingoCardArray() {
+        return bingoCardArray;
+    }
 }
