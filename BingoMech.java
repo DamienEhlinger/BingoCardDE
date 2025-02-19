@@ -39,12 +39,16 @@ public class BingoMech {
     public void checkBingoCard(String bingoDraw, String[][] bingoCardArray) {
         String bingoNum = bingoDraw;
         System.out.println("The Bingo point is: " + bingoNum);
+
         //check first letter in the string which should be the letter B, I, N, G, or O
         char letter = bingoNum.charAt(0);
         System.out.println("The letter is: " + letter);
+
         //check the number in the string which should be between 1 and 98 which is after the letter so index 2 to the end
-        String num = bingoNum.substring(2);
+        String num = bingoNum.substring(1);
         System.out.println("The number is: " + num);
+
+
 
         System.out.println("The Bingo point is: " + bingoNum);
         System.out.println("Now checking the bingo card for the number: " + bingoNum);
@@ -52,19 +56,48 @@ public class BingoMech {
         //Now we will search the Bingo card for the number
         //So this will need to select which card to check and then check the card for the number
 
-        //This will be the code to check the card for the number
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (bingoCardArray[i][j].equals(bingoNum)) {
-                    System.out.println("The number is on the card!");
-                }
-                else {
-                    System.out.println("The number is not on the card!");
-                }
+        //I will set up cases for the column so that I can check the card for the number within its respective column
+        int columnCheck = -1;
+        switch (letter){
+            case 'B':
+                System.out.println("letter is B");
+                columnCheck = 0;
+                break;
+            case 'I':
+                System.out.println("letter is I");
+                columnCheck = 1;
+                break;
+            case 'N':
+                System.out.println("letter is N");
+                columnCheck = 2;
+                break;
+            case 'G':
+                System.out.println("letter is G");
+                columnCheck = 3;
+                break;
+            case 'O':
+                System.out.println("letter is O");
+                columnCheck = 4;
+                break;
+            default:
+                System.out.println("The letter is not valid so check input or code.");
+                break;
+        }
+
+        //This will be the code to check the card for the number with the columnCheck
+        for (int i = 0; i < bingoCardArray.length; i++) {
+            if (bingoCardArray[i][columnCheck].equals(num)) {
+                System.out.println("The number is on the card!");
             }
         }
 
         System.out.println("The Bingo point has been checked!");
+    }
+
+    //Check for a BINGO on the card
+    public void checkBingo(String[][] bingoCardArray) {
+    
+        
     }
 
 
