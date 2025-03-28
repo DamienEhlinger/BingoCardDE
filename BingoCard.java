@@ -15,17 +15,35 @@ public class BingoCard {
         this.bingoCardArray = new String[5][5];
         this.bingoCardCheck = new boolean[5][5];
         this.randomCardNum = new Random();
-
+        generateBingoCard();
     }
 
     //This will generate a Bingo card
     /*UNFINISHED */
     private void generateBingoCard() {
-        //This will be the code to generate the Bingo card
-        String[] letters = {"B", "I", "N", "G", "O"};
-        
-    
+        int[][] usedNumbers = new int[5][16]; // Tracks used numbers for each column range
+        String[] headers = {"B", "I", "N", "G", "O"};
 
+        for (int col = 0; col < 5; col++) {
+            for (int row = 0; row < 5; row++) {
+                if (row == 2 && col == 2) { 
+                    //This is the free space in the middle of the card as per Bingo rules
+                    bingoCardArray[row][col] = "XX";
+                    bingoCardCheck[row][col] = true;
+                    continue;
+                }
+                int num;
+                //This will generate a random number for the card and check if it has been used
+                do {
+                    // Generate a random number between 1 and 15 for the B column, 16 and 30 for the I column, etc.
+                    num = randomCardNum.nextInt(15) + 1 + (col * 15);
+                } while (usedNumbers[col][num - (col * 15)] == 1); // This will help with creating uniqueness
+
+                usedNumbers[col][num - (col * 15)] = 1;
+                //This will add the number to the card with the letter
+                bingoCardArray[row][col] = headers[col] + num;
+            }
+        }
     }
 
     //This will be the method to print the Bingo card. First it will print the name of the card and then the card itself
@@ -40,71 +58,84 @@ public class BingoCard {
     }
 
     //This will mark off the number on the Bingo card 
-    private void markOff(String bingoNum) {
-        //This will be the code to mark off the number on the Bingo card
-        //check first letter in the string which should be the letter B, I, N, G, or O
-        char letter = bingoNum.charAt(0);
-        System.out.println("The letter is: " + letter);
-
-        //check the number in the string which should be between 1 and 98 which is after the letter so index 2 to the end
-        String num = bingoNum.substring(1);
-        //parse the string to an int
-        int numConvert = Integer.parseInt(num);
-        System.out.println("The number is: " + numConvert);
-
-        //Now we will search the Bingo card for the number
-        //So this will need to select which card to check and then check the card for the number
-        for (int i = 0; i < bingoCardArray.length; i++) {
-            for (int j = 0; j < bingoCardArray[i].length; j++) {
-                if (bingoCardArray[i][j].equals(bingoNum)) {
-                    bingoCardCheck[i][j] = true;
+    private boolean markOff(String bingoNum) {
+        // This should be a simplier way to mark off the number on the card
+        for (int row = 0; row < 5; row++) {
+            for (int col = 0; col < 5; col++) {
+                if (bingoCardArray[row][col].equals(bingoNum)) {
+                    //This will mark the number off on the card
+                    bingoCardCheck[row][col] = true;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
-    //Check for Bingo
-    /*UNFINISHED */
-    private boolean checkBingo() {
-        //This will be the code to check for Bingo by rows, columns, and diagonals
-        //Check for Bingo by rows
-        for (int i = 0; i < bingoCardCheck.length; i++) {
-            int count = 0;
-            for (int j = 0; j < bingoCardCheck[i].length; j++) {
-                if (bingoCardCheck[i][j] == true) {
-                    count++;
-                }
-            }
-            if (count == 5) {
-                return true;
+    //This method will check if a line on the Bingo card has been marked off
+    private boolean checkLine(int line) {
+        for (int i = 0; i < bingoCardCheck[line].length; i++) {
+            if (bingoCardCheck[line][i] == false) {
+                return false;
             }
         }
+        return true;
+    }
 
-        //Check for Bingo by columns
-        for (int i = 0; i < bingoCardCheck.length; i++) {
-            int count = 0;
-            for (int j = 0; j < bingoCardCheck[i].length; j++) {
-                if (bingoCardCheck[j][i] == true) {
-                    count++;
-                }
-            }
-            if (count == 5) {
-                return true;
-            }
-        }
-
-        //Check for Bingo by diagonals
+    //This will check if there is a diagonal bingo on the card
+    private boolean checkDiagonal() {
+        //This will check the two diagonals on the card
         int count = 0;
         for (int i = 0; i < bingoCardCheck.length; i++) {
             if (bingoCardCheck[i][i] == true) {
                 count++;
             }
         }
-
         if (count == 5) {
             return true;
         }
 
+        count = 0;
+        for (int i = 0; i < bingoCardCheck.length; i++) {
+            if (bingoCardCheck[i][4 - i] == true) {
+                count++;
+            }
+        }
+        if (count == 5) {
+            return true;
+        }
+        return false;
+    }
+
+    //This will check for Bingo by columns
+    private boolean checkColumn(int column) {
+        for (int i = 0; i < bingoCardCheck.length; i++) {
+            if (bingoCardCheck[i][column] == false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Check for Bingo using the checkLine, checkDiagonal, and checkColumn methods to simplify the check
+    private boolean checkBingo() {
+        //This will be the code to check for Bingo by rows, columns, and diagonals
+        for (int i = 0; i < bingoCardCheck.length; i++) {
+            if (checkLine(i) == true) {
+                return true;
+            }
+        }
+
+        for (int i = 0; i < bingoCardCheck.length; i++) {
+            if (checkColumn(i) == true) {
+                return true;
+            }
+        }
+
+        if (checkDiagonal() == true) {
+            return true;
+        }
+        return false;
     }
 
 
