@@ -70,7 +70,7 @@ public class BingoCard {
     }
 
     //This will mark off the number on the Bingo card 
-    private boolean markOff(String bingoNum) {
+    public boolean markOff(String bingoNum) {
         // This should be a simplier way to mark off the number on the card
         //parse the string the first spot relative to the letter (column) and the second spot relative to the number (row)
         char letter = bingoNum.charAt(0);

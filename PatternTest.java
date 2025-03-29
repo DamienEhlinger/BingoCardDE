@@ -1,16 +1,35 @@
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 
 public class PatternTest {
     //This will be testing the Pattern class with JUnit testing
 
+    private BingoCard bingoCard;
+    private Pattern rowPattern;
+    private Pattern columnPattern;
+    private Pattern diagonalPattern;
+    private Pattern customPattern;
+
+    
+
     @Before
     public void setUp() {
-        //This will set up the test
+        bingoCard = new BingoCard();
+        rowPattern = new Pattern(bingoCard, "row");
+        columnPattern = new Pattern(bingoCard, "column");
+        diagonalPattern = new Pattern(bingoCard, "diagonal");
+        customPattern = new Pattern(bingoCard, "custom");
     }
 
     @Test
     public void testPattern() {
-        //This will test the Pattern class
+        //This will test the Pattern class and that things initialize correctly
+        assertNotNull("Pattern should not be null", rowPattern);
+        assertNotNull("Pattern should not be null", columnPattern);
+        assertNotNull("Pattern should not be null", diagonalPattern);
+        assertNotNull("Pattern should not be null", customPattern);
     }
 
     @Test
