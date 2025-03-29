@@ -10,6 +10,13 @@ public class BingoCard {
     private Random randomCardNum;
 
     //Constructor for the BingoCard class
+    public BingoCard() {
+        this.bingoCardArray = new String[5][5];
+        this.bingoCardCheck = new boolean[5][5];
+        this.randomCardNum = new Random();
+        generateBingoCard();
+    }
+    //Constructor for the BingoCard class with a name
     public BingoCard(String name) {
         bingoCardName = name;
         this.bingoCardArray = new String[5][5];
@@ -46,7 +53,12 @@ public class BingoCard {
         }
     }
 
-    //This will be the method to print the Bingo card. First it will print the name of the card and then the card itself
+    //This method will help get rows from the Bingo card
+    public String[] getRow(int row) {
+        return bingoCardArray[row];
+    }
+
+    //This will be the method to print the Bingo card.
     public void printBingoCard() {
         System.out.println("The Bingo card name is: " + bingoCardName);
         for (int i = 0; i < bingoCardArray.length; i++) {
@@ -60,13 +72,32 @@ public class BingoCard {
     //This will mark off the number on the Bingo card 
     private boolean markOff(String bingoNum) {
         // This should be a simplier way to mark off the number on the card
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 5; col++) {
-                if (bingoCardArray[row][col].equals(bingoNum)) {
-                    //This will mark the number off on the card
-                    bingoCardCheck[row][col] = true;
-                    return true;
-                }
+        //parse the string the first spot relative to the letter (column) and the second spot relative to the number (row)
+        char letter = bingoNum.charAt(0);
+        int num = Integer.parseInt(bingoNum.substring(1));
+        int column = -1;
+        switch (letter) {
+            case 'B':
+                column = 0;
+                break;
+            case 'I':
+                column = 1;
+                break;
+            case 'N':
+                column = 2;
+                break;
+            case 'G':
+                column = 3;
+                break;
+            case 'O':
+                column = 4;
+                break;
+        }
+        //This will check the card for the number and mark it off
+        for (int i = 0; i < bingoCardArray.length; i++) {
+            if (Integer.parseInt(bingoCardArray[i][column].substring(1)) == num) {
+                bingoCardCheck[i][column] = true;
+                return true;
             }
         }
         return false;
@@ -138,7 +169,42 @@ public class BingoCard {
         return false;
     }
 
+    //These methods will be used for testing but can be used for the coding for this class as well
 
+    public BingoCard getCard() {
+        return this;
+    }
 
+    public String getName() {
+        return bingoCardName;
+    }
     
+    public int getRows() {
+        return bingoCardArray.length;
+    }
+
+    public int getColumns() {
+        return bingoCardArray[0].length;
+    }
+
+    public String getBingoCardName() {
+        return bingoCardName;
+    }
+    
+    public String[][] getBingoCardArray() {
+        return bingoCardArray;
+    }
+    
+    public boolean[][] getBingoCardCheck() {
+        return bingoCardCheck;
+    }
+    
+    public boolean hasBingo() {
+        return checkBingo();
+    }
+    
+    public boolean markNumber(String bingoNum) {
+        return markOff(bingoNum);
+    } 
+
 }
