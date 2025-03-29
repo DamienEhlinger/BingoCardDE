@@ -104,7 +104,7 @@ public class BingoCard {
     }
 
     //This method will check if a line on the Bingo card has been marked off
-    private boolean checkLine(int line) {
+    public boolean checkLine(int line) {
         for (int i = 0; i < bingoCardCheck[line].length; i++) {
             if (bingoCardCheck[line][i] == false) {
                 return false;
@@ -114,7 +114,7 @@ public class BingoCard {
     }
 
     //This will check if there is a diagonal bingo on the card
-    private boolean checkDiagonal() {
+    public boolean checkDiagonal() {
         //This will check the two diagonals on the card
         int count = 0;
         for (int i = 0; i < bingoCardCheck.length; i++) {
@@ -139,7 +139,7 @@ public class BingoCard {
     }
 
     //This will check for Bingo by columns
-    private boolean checkColumn(int column) {
+    public boolean checkColumn(int column) {
         for (int i = 0; i < bingoCardCheck.length; i++) {
             if (bingoCardCheck[i][column] == false) {
                 return false;
@@ -147,6 +147,8 @@ public class BingoCard {
         }
         return true;
     }
+
+    
 
     //Check for Bingo using the checkLine, checkDiagonal, and checkColumn methods to simplify the check
     private boolean checkBingo() {
